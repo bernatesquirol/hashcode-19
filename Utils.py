@@ -10,7 +10,7 @@ def readData(filePath):
     for i in range(rows):
         line = file.readline()
         values = line.split()
-        dicc = { 'orientation' : values[0] }
+        dicc = { 'orientation' : values[0],'id': [i] }
         tags = np.array([values[i] for i in range(2, 2+int(values[1]))], dtype=str)
         dicc['tags'] = tags
         photos[i] = dicc
@@ -29,7 +29,23 @@ def writeOutput(result, problemTitle):
     file.close()
 
 
-data = readData('a_example.txt')
-print(data)
+# +
+#data = readData('b_lovely_landscapes.txt')
+#print(data)
+# -
 
-
+def join_verticals(all_photos):
+    verticals_o = [x for x in all_photos if x['orientation']=='V']
+    verticals_r = []
+    while(len(verticals_o)!=0):
+        v = verticals_o.pop()
+        for t in verticals_o[::-1]:
+            if len(np.intersect1d(v['tags'],t['tags']))==0:
+                #print(len(verticals_o))
+                verticals_o.remove(t)
+                verticals_r.append({
+                    'id':[t['id'], v['id']],
+                    'tags':np.union1d(v['tags'],t['tags']),
+                    'orientation':'V'             
+                })
+    return [x for x in all_photos if x['orientation']!='V']+verticals_r

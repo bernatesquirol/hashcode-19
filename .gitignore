@@ -1,3 +1,9 @@
 main.ipynb
 .ipynb_checkpoints/main-checkpoint.ipynb
 .ipynb_checkpoints/main-checkpoint.py
+
+\.ipynb_checkpoints/Utils-checkpoint\.ipynb
+
+\.ipynb_checkpoints/
+
+*.ipynb
