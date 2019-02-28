@@ -10,7 +10,7 @@ def readData(filePath):
     for i in range(rows):
         line = file.readline()
         values = line.split()
-        dicc = { 'orientation' : values[0] }
+        dicc = { 'id' : [i], 'orientation' : values[0] }
         tags = np.array([values[i] for i in range(2, 2+int(values[1]))], dtype=str)
         dicc['tags'] = tags
         photos[i] = dicc
