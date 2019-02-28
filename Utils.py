@@ -13,6 +13,7 @@ def readData(filePath):
         dicc = { 'id' : [i], 'orientation' : values[0] }
         tags = np.array([values[i] for i in range(2, 2+int(values[1]))], dtype=str)
         dicc['tags'] = tags
+        dicc['num'] = len(tags)
         photos[i] = dicc
 
     file.close()
